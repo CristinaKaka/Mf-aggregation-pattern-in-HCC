@@ -100,3 +100,6 @@ csd_Mf  <- csd_Mf  %>%
   group_by(QupathID) %>%
   mutate(normalized_LAG3PD1Tc = (`Distance to LAG3_PD1_CD8Tc`/max(`Distance to LAG3_PD1_CD8Tc`))*100)
 
+csdD_Mf <- csdD_all %>%
+  `50um_LAG3_PD1_CD8Tc_R` = ((`50um_LAG3_PD1_CD8Tc`)/(`50um_CD8Tc`))*100
+  )
