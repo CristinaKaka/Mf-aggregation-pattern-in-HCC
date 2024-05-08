@@ -8,13 +8,13 @@ setwd('D:/Clustered Mf/WYL/Spatial Analysis/Qupath/18-MRS&macrophage cluster/dif
 # if (!require("BiocManager", quietly = TRUE))
 #   install.packages("BiocManager")
 #  options(BioC_mirror="https://mirrors.tuna.tsinghua.edu.cn/bioconductor")
-# BiocManager::install(version = '3.16',lib = 'E:/software/R-4.2.2/library')
+# BiocManager::install(version = '3.16',lib = '...')
 # BiocManager::install(c("rnaseqGene","glmpca","sva",
-#                        "DEGreport","rnaseqDTU","msigdbr","PoiClaClu"),lib = 'E:/software/R-4.1.3/library')
+#                        "DEGreport","rnaseqDTU","msigdbr","PoiClaClu"),lib = '...')
 # 
-# BiocManager::install(c("tximeta"),lib = 'E:/software/R-4.2.2/library')
-# BiocManager::install(c("airway"),lib = 'E:/software/R-4.2.2/library')
-# BiocManager::install(c("DESeq2"),lib = 'E:/software/R-4.2.2/library')
+# BiocManager::install(c("tximeta"),lib = '...')
+# BiocManager::install(c("airway"),lib = '...')
+# BiocManager::install(c("DESeq2"),lib = '...')
 
 # packages loading
 library("tximeta")
@@ -411,13 +411,13 @@ gene_up=rownames(need_DEG[with(need_DEG,log2FoldChange>log2FC_cutoff & pvalue<pv
 gene_down=rownames(need_DEG[with(need_DEG,log2FoldChange < -log2FC_cutoff & pvalue<pvalue_cutoff & padj<padj_cutoff),])
 
 # transfer symbol to entrezID
-gene_up_entrez <- as.character(na.omit(bitr(gene_up, #数据集
-                                            fromType="SYMBOL", #输入格式
-                                            toType="ENTREZID", # 转为ENTERZID格式
+gene_up_entrez <- as.character(na.omit(bitr(gene_up,
+                                            fromType="SYMBOL",
+                                            toType="ENTREZID", 
                                             OrgDb="org.Hs.eg.db")[,2])) #"org.Hs.eg.db" "org.Mm.eg.db"
-gene_down_entrez <- as.character(na.omit(bitr(gene_down, #数据集
-                                              fromType="SYMBOL", #输入格式
-                                              toType="ENTREZID", # 转为ENTERZID格式
+gene_down_entrez <- as.character(na.omit(bitr(gene_down,
+                                              fromType="SYMBOL", 
+                                              toType="ENTREZID", #
                                               OrgDb="org.Hs.eg.db")[,2])) #"org.Hs.eg.db" "org.Mm.eg.db"
 
 gene_diff_entrez <- unique(c(gene_up_entrez ,gene_down_entrez))
@@ -490,13 +490,13 @@ go_enrich_30 <- data.frame(go_enrich_results) %>%
 go_enrich_30 <- go_enrich_30[1:10,]
 go_enrich_30$number <- factor(go_enrich_30$Description,levels = rev(go_enrich_30$Description))
 
-gotermplot <- ggplot(data = go_enrich_30, # 绘图使用的数据
-       aes(x = Count,y = reorder(number,Count)))+ #横纵坐标及排序
-  geom_point(aes(size = Count,color = p.adjust))+ # 气泡大小及颜色设置
+gotermplot <- ggplot(data = go_enrich_30, 
+       aes(x = Count,y = reorder(number,Count)))+ 
+  geom_point(aes(size = Count,color = p.adjust))+ 
   theme_bw()+ # 去除背景色
-  scale_colour_gradient(low = "red",high = "blue")+ # 设置气泡渐变色
-  labs(x = "Gene Number", y = "",title = "Gene ontologies", # 设置坐标轴标题及图标题
-       color = expression(p.adjust),size = "Count")+ # 设置图例颜色及大小
+  scale_colour_gradient(low = "red",high = "blue")+ 
+  labs(x = "Gene Number", y = "",title = "Gene ontologies", 
+       color = expression(p.adjust),size = "Count")+ 
   scale_y_discrete(labels = function(x) str_wrap(x,width = 43))+
   theme(axis.title = element_text(size = 8),axis.text = element_text(size = 8),
         plot.title = element_text(size = 8,hjust = 0.5,face = "bold"),
