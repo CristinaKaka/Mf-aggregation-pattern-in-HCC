@@ -1,4 +1,4 @@
-# Macrophage Aggregation Features Immunosuppressive Tumor Microenvironment in T Cell-Rich Hepatocellular Carcinoma
+# Macrophage Aggregation Features Immunosuppressive Tumor Microenvironment in CTL Rich Hepatocellular Carcinoma
 This repository hosts the scripts utilized for generating the quantitative analyses detailed in our study.
 
 ## Contact
